@@ -3,7 +3,8 @@ const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 const app = express();
-app.use(express.urlencoded({extended: false}));
+app.use(express.json())
+app.use(express.urlencoded({extended: true}));
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -60,7 +61,7 @@ app.post('/create', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = client.query('INSERT INTO todo (name) VALUES ($1)',
-      [name],
+      [req.body.itemName],
       (error, results) => {
         res.redirect('pages/index', result);
         client.release();
