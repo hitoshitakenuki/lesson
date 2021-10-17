@@ -1,3 +1,4 @@
+const { name } = require('ejs');
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
@@ -58,12 +59,12 @@ app.get('/new', (req, res) => res.render('pages/new'));
 app.post('/create', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query('INSERT INTO todo (name) VALUES (?)',
-    [req.body.itemName],
-    (error, results)=>{
-    res.redirect('pages/index', result);
-    client.release();
-    });
+    const result = client.query('INSERT INTO todo (name) VALUES ($1)',
+      [name],
+      (error, results) => {
+        res.redirect('pages/index', result);
+        client.release();
+      });
   }catch (err) {
   console.error(err);
   res.send("Error " + err);
