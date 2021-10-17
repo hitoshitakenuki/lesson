@@ -21,28 +21,9 @@
           <span class="id-column">作成順</span>
           <span>やること</span>
         </div>
-        <ul class="table-body">
-
-        <% let i = 1; %>
         
-          <% items.forEach((item) => { %>
-            
-            <li>
-              <div class="item-data">
-                <span class="id-column"><%= i %></span>
-                <span class="name-column"><%= item.action %></span>
-              </div>
-              
-              <div class="item-menu">
-                <form action="/delete/<%= item.id %>" method="post">
-                  <input type="submit" value="削除">
-                </form>
-                <a href="/edit/<%= item.id %>">編集</a>
-              </div>
-            <% i += 1;  %>  
-            </li>
-          <% }); %>
-        </ul>
+
+        
       </div>
     </div>
 </body>
