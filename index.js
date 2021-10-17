@@ -59,6 +59,7 @@ app.set('view engine', 'ejs');
 app.get('/new', (req, res) => res.render('pages/new'));
 
 app.post('/create', async (req, res) => {
+  console.log( [req.body.itemName]);
   try {
     const client = await pool.connect()
     client.query('INSERT INTO todo (name) VALUES ($1)',
