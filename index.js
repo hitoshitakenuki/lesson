@@ -64,7 +64,7 @@ app.post('/create', async (req, res) => {
     client.query('INSERT INTO todo (name) VALUES ($1)',
       [req.body.itemName],
       (error, results) => {
-        res.redirect('pages/index');
+        res.redirect('/index');
         client.release();
       })
   }catch (err) {
