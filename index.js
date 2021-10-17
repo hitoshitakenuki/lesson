@@ -54,7 +54,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.get('/index', (req, res) => res.render('pages/index'));
 app.get('/new', (req, res) => res.render('pages/new'));
-app.get('/create', async (req, res) => {
+app.post('/create', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query('INSERT INTO todo (name) VALUES (?)',
