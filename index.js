@@ -57,10 +57,10 @@ app.get('/new', (req, res) => res.render('pages/new'));
 app.get('/create', async (req, res) => {
   try {
     const client = await pool.connect()
-    await client.query('INSERT INTO todo (name) VALUES (?)',
+    const result = await client.query('INSERT INTO todo (name) VALUES (?)',
     [req.body.itemName],
     (error, results)=>{
-    res.redirect('pages/index');
+    res.redirect('pages/index', result);
     client.release();
     });
   }catch (err) {
