@@ -36,6 +36,19 @@ app.get('/', async (req, res) => {
   }
 })
 
+app.get('/index', async (req, res) => {
+  try {
+    const client = await pool.connect()
+    const result = await client.query('SELECT * FROM test_table');
+    const results = { 'items': (result) ? result.rows : null};
+    res.render('pages/index', results );
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
