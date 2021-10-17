@@ -8,5 +8,42 @@
     <header>
          <a href="/" class="header-logo">TOPページへ戻る</a>
     </header>
+
+        <div class="container">
+
+      <div class="container-header">
+        <h1>やることリスト</h1>
+        <a href="/new" class="new-button">+ 新規登録</a>
+      </div>
+      
+      <div class="index-table-wrapper">
+        <div class="table-head">
+          <span class="id-column">作成順</span>
+          <span>やること</span>
+        </div>
+        <ul class="table-body">
+
+        <% let i = 1; %>
+        
+          <% items.forEach((item) => { %>
+            
+            <li>
+              <div class="item-data">
+                <span class="id-column"><%= i %></span>
+                <span class="name-column"><%= item.action %></span>
+              </div>
+              
+              <div class="item-menu">
+                <form action="/delete/<%= item.id %>" method="post">
+                  <input type="submit" value="削除">
+                </form>
+                <a href="/edit/<%= item.id %>">編集</a>
+              </div>
+            <% i += 1;  %>  
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
 </body>
 </html>
