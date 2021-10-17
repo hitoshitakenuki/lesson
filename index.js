@@ -54,5 +54,16 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.get('/index', (req, res) => res.render('pages/index'));
 app.get('/new', (req, res) => res.render('pages/new'));
+app.post('/create', (req, res) => {
+  client.query(
+    'INSERT INTO test_table (name) VALUES (?)',
+    [req.body.itemName],
+    (error, results) => {
+      res.redirect('pages/new');
+    }
+  );
+});
+
+
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
