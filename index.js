@@ -47,21 +47,26 @@ app.get('/index', async (req, res) => {
     console.error(err);
     res.send("Error " + err);
   }
-})
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.get('/index', (req, res) => res.render('pages/index'));
 app.get('/new', (req, res) => res.render('pages/new'));
-app.post('/create', (req, res) => {
-  client.query(
-    'INSERT INTO test_table (name) VALUES (?)',
+app.get('/create', async (req, res) => {
+  try {
+    const client = await pool.connect()
+    await client.query('INSERT INTO todo (name) VALUES (?)',
     [req.body.itemName],
-    (error, results) => {
-      res.redirect('pages/new');
-    }
-  );
+    (error, results)=>{
+    res.redirect('pages/index');
+    client.release();
+    });
+  }catch (err) {
+  console.error(err);
+  res.send("Error " + err);
+  }
 });
 
 
