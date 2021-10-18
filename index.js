@@ -78,7 +78,7 @@ app.post('/delete:id', async (req, res) => {
   
   try {
     const client = await pool.connect()
-    client.query('DELETE FROM todo WHERE id = ($1)',
+    client.query('DELETE FROM todo WHERE (id) = ($2)',
       req.params.id,
       (error, results) => {
         res.redirect('/index');
