@@ -29,7 +29,7 @@ app.get('/db', async (req, res) => {
 app.get('/', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query('SELECT * FROM test_table');
+    const result = await client.query('SELECT * FROM todo');
     const results = { 'results': (result) ? result.rows : null};
     res.render('pages/top', results );
     client.release();
@@ -42,7 +42,7 @@ app.get('/', async (req, res) => {
 app.get('/index', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query('SELECT * FROM test_table');
+    const result = await client.query('SELECT * FROM todo');
     const results = { 'items': (result) ? result.rows : null};
     res.render('pages/index', results );
     client.release();
@@ -62,7 +62,7 @@ app.post('/create', async (req, res) => {
   console.log( [req.body.itemName]);
   try {
     const client = await pool.connect()
-    client.query('INSERT INTO test_table (name) VALUES ($1)',
+    client.query('INSERT INTO todo (name) VALUES ($1)',
       [req.body.itemName],
       (error, results) => {
         res.redirect('/index');
@@ -78,7 +78,7 @@ app.post('/delete:id', async (req, res) => {
   
   try {
     const client = await pool.connect()
-    client.query('DELETE FROM test_table WHERE id = ($1)',
+    client.query('DELETE FROM todo WHERE id = ($1)',
       req.params.id,
       (error, results) => {
         res.redirect('/index');
