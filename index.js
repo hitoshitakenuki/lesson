@@ -94,6 +94,15 @@ app.get("/edit/:id", (req, res) => {
   );
 });
 
+app.post("/edit/:id", (req, res) => {
+  const id = req.params.id;
+  const todo = [req.body.itemName, id];
+  const sql = "UPDATE todo SET action = $1 WHERE (id = $4)";
+  pool.query(sql, todo, (err, result) => {
+    // if (err) ...
+    res.redirect("/index");
+  });
+});
 
 
 
