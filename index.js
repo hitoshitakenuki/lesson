@@ -85,10 +85,10 @@ app.post("/delete/:id", (req, res) => {
 });
 
 app.get('/edit/:id', (req, res) => {
-  pool.query(
-    'SELECT * FROM todo WHERE id = ?',
-    [req.params.id],
-    (error, results) => {
+  const id = req.params.id;
+  console.log(id);
+  const sql = "SELECT * FROM todo WHERE id = ?";
+  pool.query(sql,[id],(error, results) => {
       res.render('pages/edit', {item: results[0]});
     }
   );
