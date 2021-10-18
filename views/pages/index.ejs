@@ -35,7 +35,7 @@
               </div>
               
               <div class="item-menu">
-                <form action="/delete/<%= item.id %>" method="delete">
+                <form action="/delete/<%= item.id %>" method="post">
                   <input type="submit" value="削除">
                 </form>
                 <a href="/edit/<%= item.id %>">編集</a>

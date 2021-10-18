@@ -74,20 +74,15 @@ app.post('/create', async (req, res) => {
   }
 });
 
-app.delete('/delete:id', async (req, res) => {
-  
-  try {
-    const client = await pool.connect()
-    client.query('DELETE FROM todo WHERE id = $2',
-      [req.params.id],
-      (error, results) => {
-        res.redirect('/index');
-        client.release();
-      })
-  }catch (err) {
-  console.error(err);
-  res.send("Error " + err);
-  }
+
+
+app.post("/delete/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = "DELETE todo WHERE action = $1";
+  client.query(sql, [id], (err, result) => {
+    // if (err) ...
+    res.redirect("/index");
+  });
 });
 
 
