@@ -62,7 +62,7 @@ app.post('/create', async (req, res) => {
   console.log( [req.body.itemName]);
   try {
     const client = await pool.connect()
-    pool.query('INSERT INTO todo (action) VALUES ($1)',
+    client.query('INSERT INTO todo (action) VALUES ($1)',
       [req.body.itemName],
       (error, results) => {
         res.redirect('/index');
@@ -80,7 +80,7 @@ app.post("/delete/:id", (req, res) => {
   const id = req.params.id;
   console.log(id);
   const sql = "DELETE FROM todo WHERE id = $1";
-  client.query(sql, [id], (err, result) => {
+  pool.query(sql, [id], (err, result) => {
     // if (err) ...
     res.redirect("/index");
   });
