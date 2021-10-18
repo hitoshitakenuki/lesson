@@ -84,12 +84,12 @@ app.post("/delete/:id", (req, res) => {
   });
 });
 
-app.get('/edit/:id', (req, res) => {
+app.get("/edit/:id", (req, res) => {
   const id = req.params.id;
   console.log(id);
-  const sql = "SELECT * FROM todo WHERE id = ?";
+  const sql = "SELECT * FROM todo WHERE id = $1";
   pool.query(sql,[id],(error, results) => {
-      res.render('pages/edit', {item: results[0]});
+      res.render('pages/edit', {item: results.rows[0]});
     }
   );
 });
