@@ -78,7 +78,8 @@ app.post('/create', async (req, res) => {
 
 app.post("/delete/:id", (req, res) => {
   const id = req.params.id;
-  const sql = "DELETE FROM todo WHERE action = $1";
+  console.log(id);
+  const sql = "DELETE FROM todo WHERE id = $1";
   client.query(sql, [id], (err, result) => {
     // if (err) ...
     res.redirect("/index");
