@@ -74,7 +74,7 @@ app.post('/create', async (req, res) => {
   }
 });
 
-app.post('/delete:id', async (req, res) => {
+app.delete('/delete:id', async (req, res) => {
   
   try {
     const client = await pool.connect()
