@@ -62,7 +62,7 @@ app.post('/create', async (req, res) => {
   console.log( [req.body.itemName]);
   try {
     const client = await pool.connect()
-    client.query('INSERT INTO todo (name) VALUES ($1)',
+    client.query('INSERT INTO todo (action) VALUES ($1)',
       [req.body.itemName],
       (error, results) => {
         res.redirect('/index');
