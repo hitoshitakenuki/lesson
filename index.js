@@ -74,6 +74,22 @@ app.post('/create', async (req, res) => {
   }
 });
 
+app.post('/delete:id', async (req, res) => {
+  
+  try {
+    const client = await pool.connect()
+    client.query('DELETE FROM test_table WHERE (name) = ($1)',
+      [req.params.id],
+      (error, results) => {
+        res.redirect('/index');
+        client.release();
+      })
+  }catch (err) {
+  console.error(err);
+  res.send("Error " + err);
+  }
+});
+
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
