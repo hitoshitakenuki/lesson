@@ -74,8 +74,6 @@ app.post('/create', async (req, res) => {
   }
 });
 
-
-
 app.post("/delete/:id", (req, res) => {
   const id = req.params.id;
   console.log(id);
@@ -85,6 +83,18 @@ app.post("/delete/:id", (req, res) => {
     res.redirect("/index");
   });
 });
+
+app.get('/edit/:id', (req, res) => {
+  pool.query(
+    'SELECT * FROM todo WHERE id = ?',
+    [req.params.id],
+    (error, results) => {
+      res.render('edit.ejs', {item: results[0]});
+    }
+  );
+});
+
+
 
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

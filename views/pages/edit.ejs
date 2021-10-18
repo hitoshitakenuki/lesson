@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include ("../partials/header.ejs") %>
+</head>
+
+ <body>
+    <header>
+      <a href="/" class="header-logo">TOPページへ戻る</a>
+    </header>
+    <div class="container">
+      <div class="container-header">
+        <h1>編集</h1>
+      </div>
+      <div class="item-form-wrapper">
+        <p class="form-label">やること（35文字以内）</p>
+        <form action="/update/<%= item.id %>" method="post">
+          <input type="text" name="itemName" value="<%= item.action %>" maxlength="35"　required>
+          <input type="submit" value="更新する">
+        </form>
+        <a href="/index" class="cancel-button">キャンセル</a>
+      </div>
+      
+    </div>
+  </body>
+</html>
