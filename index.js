@@ -89,7 +89,7 @@ app.get('/edit/:id', (req, res) => {
     'SELECT * FROM todo WHERE id = ?',
     [req.params.id],
     (error, results) => {
-      res.render('edit.ejs', {item: results[0]});
+      res.render('pages/edit', {item: results[0]});
     }
   );
 });
