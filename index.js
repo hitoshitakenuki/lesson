@@ -94,7 +94,7 @@ app.get("/edit/:id", (req, res) => {
   );
 });
 
-app.post("/edit/:id", (req, res) => {
+app.post("/update/:id", (req, res) => {
   const id = req.params.id;
   const todo = [req.body.itemName, id];
   const sql = "UPDATE todo SET action = $1 WHERE (id = $4)";
